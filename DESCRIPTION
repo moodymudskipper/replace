@@ -11,3 +11,5 @@ RoxygenNote: 7.2.3
 Imports: 
     stringr,
     utils
+URL: https://github.com/moodymudskipper/replace
+BugReports: https://github.com/moodymudskipper/replace/issues
