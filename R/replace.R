@@ -20,6 +20,9 @@
 #'
 #' @examples
 replace_in_files <- function(target, replacement, paths = "R", what = c("var", "fun")) {
+  # for notes
+  token <- text <- NULL
+
   what <- match.arg(what, several.ok = TRUE, choices =  c("var", "fun", "arg", "formal", "package"))
   what <- c(
     var = "SYMBOL",
@@ -35,7 +38,7 @@ replace_in_files <- function(target, replacement, paths = "R", what = c("var", "
   for (path in paths) {
     lines <- readLines(path)
     pd <- subset(
-      getParseData(parse(file = path), includeText = TRUE),
+      utils::getParseData(parse(text = lines, keep.source = TRUE), includeText = TRUE),
       token %in% what & text == target
     )
     # start from the end and loop in case there are several replacement per line

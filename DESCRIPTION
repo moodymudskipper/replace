@@ -3,10 +3,11 @@ Title: Replace Variable Names in R Scripts
 Version: 0.0.0.9000
 Authors@R: 
     person("Antoine", "Fabri", , "antoine.fabri@example.com", role = c("aut", "cre"))
-Description: Choose a target, a replacement, files or folders, and whether you want to replace standard variables, function calls, argument names, formal names, or package names
+Description: Choose a target, a replacement, files or folders, and whether you want to replace standard variables, function calls, argument names, formal names, or package names.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
-    stringr
+    stringr,
+    utils
