@@ -4,7 +4,14 @@
 \alias{replace_in_files}
 \title{Replace occurence of variable in files}
 \usage{
-replace_in_files(target, replacement, paths = "R", what = c("var", "fun"))
+replace_in_files(
+  target,
+  replacement,
+  paths = "R",
+  what = c("var", "fun"),
+  regex = FALSE,
+  ...
+)
 }
 \arguments{
 \item{target}{a string}
@@ -24,6 +31,6 @@ mapped to token types found in the output of \code{getParseData()}. See details.
 }}
 }
 \description{
-Use to replace a variable name in a collection of files, keeping control on the type of
-replacement.
+Use to replace a variable name in a collection of files, keeping control on
+the type of replacement.
 }

@@ -21,9 +21,10 @@ remotes::install_github("moodymudskipper/replace")
 library(replace)
 tmp <- tempfile(fileext = ".R")
 code <- "
+# foo
 foo <- function(foo = foo) {
-   foo(foo)
-   foo::foo(foo = foo)
+   foo('foo')
+   foo::foo(foo = foo$foo)
    lapply(foo, foo)
 }
 "
@@ -33,16 +34,19 @@ writeLines(code, tmp)
 # below we do it every token type in succession
 
 #tmp
-replace_in_files("foo", "VAR", tmp, "var") # variable names
-replace_in_files("foo", "FUN", tmp, "fun") # function calls
-replace_in_files("foo", "ARG", tmp, "arg") # arguments
-replace_in_files("foo", "FORMAL", tmp, "formal") # formals
-replace_in_files("foo", "PACKAGE", tmp, "package") # packages
+replace_in_files("foo", "VAR", tmp, "var") # variable names and `$` elements
+replace_in_files("foo", "FUN", tmp, "fun")
+replace_in_files("foo", "ARG", tmp, "arg")
+replace_in_files("foo", "FORMAL", tmp, "formal")
+replace_in_files("foo", "PACKAGE", tmp, "package")
+replace_in_files("# foo", "# COMMENT", tmp, "comment")
+replace_in_files("'foo'", "'STRING'", tmp, "string")
 cat(readLines(tmp), sep = "\n")
 #> 
+#> # COMMENT
 #> VAR <- function(FORMAL = VAR) {
-#>    FUN(VAR)
-#>    PACKAGE::FUN(ARG = VAR)
+#>    FUN('STRING')
+#>    PACKAGE::FUN(ARG = VAR$VAR)
 #>    lapply(VAR, VAR)
 #> }
 ```
