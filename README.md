@@ -23,6 +23,7 @@ tmp <- tempfile(fileext = ".R")
 code <- "
 # foo
 foo <- function(foo = foo) {
+   foo(this)
    foo('foo')
    foo::foo(foo = foo$foo)
    lapply(foo, foo)
@@ -41,10 +42,12 @@ replace_in_files("foo", "FORMAL", tmp, "formal")
 replace_in_files("foo", "PACKAGE", tmp, "package")
 replace_in_files("# foo", "# COMMENT", tmp, "comment")
 replace_in_files("'foo'", "'STRING'", tmp, "string")
+replace_in_files("FUN(this)", "EXPRESSION", tmp, "expression")
 cat(readLines(tmp), sep = "\n")
 #> 
 #> # COMMENT
 #> VAR <- function(FORMAL = VAR) {
+#>    EXPRESSION
 #>    FUN('STRING')
 #>    PACKAGE::FUN(ARG = VAR$VAR)
 #>    lapply(VAR, VAR)
