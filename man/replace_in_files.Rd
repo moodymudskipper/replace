@@ -20,17 +20,25 @@ replace_in_files(
 
 \item{paths}{a vector of paths or folders, if the latter all R scripts (".R", ".r") are considered}
 
-\item{what}{one or several of "var", "fun", "arg", "formal", "package". They are
-mapped to token types found in the output of \code{getParseData()}. See details.
+\item{what}{one or several of "var", "fun", "arg", "formal", "package", "comment", "expression". They are
+mapped to token types found in the output of \code{getParseData()}. See details.}
+
+\item{regex}{a boolean. Whether to use regular expressions for detection and replacement.
 \itemize{
-\item "var" : standard variable names \code{target}
+\item "var" : standard variable names \code{target}, includes element names \code{foo$target}
 \item "fun" : function calls \code{target()} (if called through lapply etc a function will be matched with "var", not "fun")
 \item "arg" : Function argument name \code{foo(target = bar)}
 \item "formal" : a function's formal definition \code{function(target) {}} or \verb{function(target = ) \{\}}
 \item "package" : \code{target::foo} or \code{target:::foo}
-}}
+\item "comment" : comments, usually more useful with \code{regex = TRUE}
+\item "string" : strings like \code{"target"}
+\item "expression" : complex calls
+}
+
+For comments the "#" should be included in \code{target} and in the replacement and for strings, the quotes should be included
+in \code{target} (unless we use \code{regex = TRUE}).}
 }
 \description{
-Use to replace a variable name in a collection of files, keeping control on
+Use to replace code in a collection of files, keeping control on
 the type of replacement.
 }

@@ -22,7 +22,6 @@
 #' For comments the "#" should be included in `target` and in the replacement and for strings, the quotes should be included
 #' in `target` (unless we use `regex = TRUE`).
 #'
-#' @return
 #' @export
 replace_in_files <- function(target, replacement, paths = "R", what = c("var", "fun"), regex = FALSE, ...) {
   # for notes

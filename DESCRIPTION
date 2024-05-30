@@ -7,7 +7,7 @@ Description: Choose a target, a replacement, files or folders, and whether you w
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Imports: 
     stringr,
     utils
